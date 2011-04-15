@@ -35,4 +35,19 @@ class Git_Core {
 
 		return $stdout;
 	}
+
+	/**
+	 * Clones a repository
+	 *
+	 * @return NULL
+	 */
+	public function clone_remote($remote_url, $options = '', $overwrite = FALSE)
+	{
+		if ($overwrite)
+		{
+			exec('rm -rf '.escapeshellcmd($this->_repo_path));
+		}
+
+		return $this->execute('clone '.escapeshellcmd($options).' '.escapeshellcmd($remote_url).' '.escapeshellcmd($this->_repo_path));
+	}
 }
